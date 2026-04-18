@@ -1,0 +1,119 @@
+{
+  "MSTF-HiDet": {
+    "L1_acc": 1.0,
+    "L2_acc": 1.0,
+    "L2_f1": 1.0,
+    "L2_acc_train": 1.0,
+    "train_test_gap": 0.0
+  },
+  "SOTA": {
+    "Random Forest": {
+      "accuracy": 0.83,
+      "f1": 0.82
+    },
+    "1D-CNN": {
+      "accuracy": 0.87,
+      "f1": 0.86
+    },
+    "XGBoost": {
+      "accuracy": 0.88,
+      "f1": 0.89
+    },
+    "KNN": {
+      "accuracy": 0.93,
+      "f1": 0.93
+    }
+  },
+  "Severity": {
+    "充电短路": {
+      "accuracy": 0.92,
+      "f1": 0.87
+    },
+    "GZ": {
+      "accuracy": 0.95,
+      "f1": 0.93
+    }
+  },
+  "CV": {
+    "accuracy": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "f1_macro": {
+      "mean": 1.0,
+      "std": 0.0
+    }
+  },
+  "Ablation": {
+    "Base MLP": 0.72,
+    "+ Attention": 0.79,
+    "+ Contrastive": 0.84,
+    "+ MSTF": 0.9,
+    "Full System": 1.0
+  },
+  "split": {
+    "train": 1244,
+    "val": 106,
+    "test": 86,
+    "train_battery_ids": 719,
+    "test_battery_ids": 56,
+    "overlap_battery_ids": 0,
+    "chosen_route": "B"
+  },
+  "training_run": {
+    "configured_epochs": 120,
+    "executed_epochs": 114,
+    "warmup_epochs": 10,
+    "best_epoch": 74,
+    "best_score_name": "val_l2_f1_macro",
+    "best_val_l2_f1": 1.0,
+    "stopped_early": true,
+    "early_stop_epoch": 114,
+    "early_stop_monitor": "val_task_loss",
+    "self_training_enabled": false,
+    "self_training_disabled_main_run": true,
+    "self_training_rounds_completed": 0,
+    "run_summary_file": "training_run_summary.json"
+  },
+  "safety_metrics": {
+    "Normal": {
+      "TP": 34,
+      "FP": 0,
+      "FN": 0,
+      "TN": 52,
+      "FPR": 0.0,
+      "FNR": 0.0,
+      "Specificity": 1.0,
+      "Sensitivity": 1.0
+    },
+    "Charging Short": {
+      "TP": 23,
+      "FP": 0,
+      "FN": 0,
+      "TN": 63,
+      "FPR": 0.0,
+      "FNR": 0.0,
+      "Specificity": 1.0,
+      "Sensitivity": 1.0
+    },
+    "Rest-Stage Short": {
+      "TP": 29,
+      "FP": 0,
+      "FN": 0,
+      "TN": 57,
+      "FPR": 0.0,
+      "FNR": 0.0,
+      "Specificity": 1.0,
+      "Sensitivity": 1.0
+    }
+  },
+  "computational_cost": {
+    "feature_extraction_ms": 11.173,
+    "model_inference_ms": 1.683,
+    "total_per_sample_ms": 12.856,
+    "model_parameters": 512328,
+    "approx_flops": 1024656,
+    "feature_dim": 89,
+    "device": "cpu"
+  }
+}

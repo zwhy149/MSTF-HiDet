@@ -1,0 +1,10 @@
+{
+  "seeds": [
+    42,
+    52,
+    62,
+    72,
+    82
+  ],
+  "note": "Exported from the AE9 original Route B split logic without changing the method."
+}

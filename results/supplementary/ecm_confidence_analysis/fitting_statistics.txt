@@ -1,0 +1,41 @@
+Physics-Informed 2RC ECM Fitting Analysis — 1 Ohm ISC
+==========================================================
+
+Model: V(t) = V0 + a*t + b*t^2 + g*(1-exp(-t/t1)) + d*(1-exp(-t/t2))
+       - D_isc*(1-exp(-(t-tf)/t_isc))   [t >= tf]
+
+Data points:        3601
+Fault onset:        t = 1802 s
+Parameters:         9
+DoF:                3592
+
+Fitted Parameters:
+  V0       =        2.90191  +/- 0.001951 V
+  α        =    1.82249e-44  +/- 3.521e-06 V/s
+  β        =    1.47923e-08  +/- 6.102e-10 V/s²
+  γ        =       0.382846  +/- 0.006027 V
+  τ1       =        59.9307  +/- 1.184 s
+  δ        =       0.175662  +/- 0.004037 V
+  τ2       =        310.902  +/- 17.61 s
+  Δ_isc    =      0.0462283  +/- 0.001222 V
+  τ_isc    =        230.991  +/- 8.707 s
+
+Goodness of Fit:
+  RMSE             = 6.805 mV
+  RMSE (pre-fault) = 4.846 mV
+  RMSE (post-fault)= 8.316 mV
+  MAE              = 5.086 mV
+  Max |error|      = 41.811 mV
+  R^2              = 0.99370414
+
+Bootstrap RMSE (n=10000):
+  Mean   = 6.805 mV
+  95% CI = [6.540, 7.069] mV
+
+Band Coverage:
+  95% Confidence band:  6.7%
+  95% Prediction band:  95.4%
+
+Normality Tests:
+  Shapiro-Wilk p = 0.0000
+  KS test p      = 0.0000

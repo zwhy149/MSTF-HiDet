@@ -249,7 +249,7 @@ add_panel_label(ax_tsne1, '(c)')
 # ────── (d) t-SNE L2: Scenario & Severity ──────
 color_l2  = {0: '#7F8C8D', 1: '#E74C3C', 2: '#2E86C1'}
 marker_l2 = {0: 'o',       1: '^',       2: 's'}
-sc_labels = {0: 'Normal',  1: 'Charging Short', 2: 'Rest-Stage Short'}
+sc_labels = {0: 'Normal',  1: 'Charging Short', 2: 'Full-SOC Resting Short-circuit'}
 cmaps_l2  = {1: 'Reds', 2: 'Blues'}
 
 all_r = [np.log10(float(s.get('resistance')))

@@ -34,7 +34,7 @@ AVG_ROOT = ROOT / "avg_evaluation_results"
 RUNS_ROOT = AVG_ROOT / "runs"
 DEFAULT_SEEDS = [42, 52, 62, 72, 82]
 FIXED_BASELINES = ["Random Forest", "1D-CNN", "XGBoost", "KNN"]
-L2_NAMES = ["Normal", "Charging Short", "Rest-Stage Short"]
+L2_NAMES = ["Normal", "Charging Short", "Full-SOC Resting Short-circuit"]
 L1_NAMES = ["Normal", "Fault"]
 
 
@@ -474,7 +474,7 @@ def write_summary_files(run_rows, summary_by_method, safety_summary, seeds):
     with open(AVG_ROOT / "README_avg_evaluation.md", "w", encoding="utf-8") as f:
         f.write(
             "# AE9 Repeated-Average Evaluation\n\n"
-            "- Source logic: copied from `D:\\AE7 - 副本` without editing the original folder.\n"
+            "- Source logic: copied from `D:\\AE7 - Copy` without editing the original folder.\n"
             "- Repeated seeds: " + ", ".join(map(str, seeds)) + "\n"
             "- Fixed baseline set for the new SOTA figure: Random Forest, 1D-CNN, XGBoost, KNN.\n"
             "- The averaged SOTA figure is produced by the wrapper script and does not overwrite the original single-run figure.\n"

@@ -29,7 +29,7 @@
       "accuracy": 0.92,
       "f1": 0.87
     },
-    "GZ": {
+    "Full-SOC Resting Short-circuit": {
       "accuracy": 0.95,
       "f1": 0.93
     }
@@ -96,7 +96,7 @@
       "Specificity": 1.0,
       "Sensitivity": 1.0
     },
-    "Rest-Stage Short": {
+    "Full-SOC Resting Short-circuit": {
       "TP": 29,
       "FP": 0,
       "FN": 0,

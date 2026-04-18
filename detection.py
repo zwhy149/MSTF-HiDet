@@ -6,7 +6,7 @@ Usage:
   python detector.py --file  test_file.xlsx --plot
 
 Loads a trained model bundle and performs:
-  1. File-level classification: Normal / Charging Short / Rest-Stage Short
+  1. File-level classification: Normal / Charging Short / Full-SOC Resting Short-circuit
   2. Sliding-window detection to locate fault onset
   3. Detection delay measurement
 """
@@ -23,6 +23,12 @@ warnings.filterwarnings('ignore')
 
 from scipy.signal import find_peaks, savgol_filter
 from scipy.stats import kurtosis, skew
+
+SCENARIO_DISPLAY_NAMES = {
+    'Normal': 'Normal',
+    '充电短路': 'Charging Short',
+    'GZ': 'Full-SOC Resting Short-circuit',
+}
 
 
 # --- Network definition (matches training code) ---
@@ -592,20 +598,20 @@ def generate_sci_detection_figure(detector, base_dir, output_dir):
 
     target_r = [10, 1, 0.1, 0.01]
     scenarios = {
-        '充电短路': {'en': 'Charging Short-Circuit', 'color': '#D32F2F', 'light': '#FFCDD2'},
-        'GZ': {'en': 'Short Circuit during Rest Stage', 'color': '#1565C0', 'light': '#BBDEFB'},
+        '充电短路': {'en': 'Charging Short', 'slug': 'charging_short', 'color': '#D32F2F', 'light': '#FFCDD2'},
+        'GZ': {'en': 'Full-SOC Resting Short-circuit', 'slug': 'full_soc_resting_short_circuit', 'color': '#1565C0', 'light': '#BBDEFB'},
     }
 
     os.makedirs(output_dir, exist_ok=True)
 
     for sc_cn, sc_info in scenarios.items():
         print(f"\n{'='*60}")
-        print(f"  Processing: {sc_cn} ({sc_info['en']})")
+        print(f"  Processing: {sc_info['en']}")
         print(f"{'='*60}")
 
         files = find_representative_files(base_dir, sc_cn, target_r)
         if not files:
-            print(f"  ⚠ No files found for {sc_cn}")
+            print(f"  [WARN] No files found for {sc_info['en']}")
             continue
 
         available_r = sorted(files.keys(), reverse=True)
@@ -723,8 +729,8 @@ def generate_sci_detection_figure(detector, base_dir, output_dir):
         plt.tight_layout(rect=[0, 0, 1, 1.0])
 
         # Save
-        out_pdf = os.path.join(output_dir, f'Detection_{sc_cn}.pdf')
-        out_png = os.path.join(output_dir, f'Detection_{sc_cn}.png')
+        out_pdf = os.path.join(output_dir, f'Detection_{sc_info["slug"]}.pdf')
+        out_png = os.path.join(output_dir, f'Detection_{sc_info["slug"]}.png')
         fig.savefig(out_pdf, format='pdf', bbox_inches='tight', dpi=300)
         fig.savefig(out_png, dpi=300, bbox_inches='tight')
         plt.close()
@@ -884,7 +890,7 @@ def main():
             d = os.path.join(base_dir, sc)
             if os.path.isdir(d):
                 print(f"\n\n{'='*60}")
-                print(f"  Scenario: {sc}")
+                print(f"  Scenario: {SCENARIO_DISPLAY_NAMES.get(sc, sc)}")
                 print(f"{'='*60}")
                 detector.detect_dir(d)
 

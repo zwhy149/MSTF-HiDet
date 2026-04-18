@@ -1,5 +1,5 @@
 # MSTF-HiDet: Multi-Scale Temporal Fusion Hierarchical Detection
-# Three-class ISC diagnosis: Normal / Charging Short / Rest-Stage Short
+# Three-class ISC diagnosis: Normal / Charging Short / Full-SOC Resting Short-circuit
 
 import os, re, warnings, json, time as _time, copy, pickle
 import numpy as np
@@ -33,6 +33,12 @@ from matplotlib.lines import Line2D
 from matplotlib import font_manager
 
 warnings.filterwarnings('ignore')
+
+SCENARIO_DISPLAY_NAMES = {
+    'Normal': 'Normal',
+    '充电短路': 'Charging Short',
+    'GZ': 'Full-SOC Resting Short-circuit',
+}
 
 # Global plot style
 def setup_fonts():
@@ -164,7 +170,7 @@ def load_all_data():
         print(f"\n>>> Loading {src}: {base}")
         for folder, sc in mapping.items():
             ss = load_scenario(base, folder, sc, src)
-            if ss: print(f"  {sc}: {len(ss)}")
+            if ss: print(f"  {SCENARIO_DISPLAY_NAMES.get(sc, sc)}: {len(ss)}")
             all_s.extend(ss)
     print(f"\n  Total: {len(all_s)} samples")
     return all_s
@@ -330,15 +336,15 @@ class MSTFExtractor:
         if n < 20: return np.zeros(10)
         diff = np.diff(sig)
         abs_d = np.abs(diff)
-        # 1. Sharpness: max|derivative| / mean|derivative| — high for CS, low for GZ
+        # 1. Sharpness: max|derivative| / mean|derivative| — high for CS, low for full-SOC resting ISC
         sharpness = np.max(abs_d) / (np.mean(abs_d) + 1e-10)
-        # 2. Smoothness: std of second derivative — low for GZ, high for CS
+        # 2. Smoothness: std of second derivative — low for full-SOC resting ISC, high for CS
         d2 = np.diff(diff)
         smoothness = np.std(d2) if len(d2) > 1 else 0
         # 3. Monotonicity: fraction of consecutive same-sign derivatives
         signs = np.sign(diff)
         same_sign = np.sum(signs[1:] == signs[:-1]) / max(len(signs)-1, 1) if len(signs) > 1 else 0
-        # 4. Linearity: R² of linear fit — high for GZ (steady trend)
+        # 4. Linearity: R² of linear fit — high for full-SOC resting ISC (steady trend)
         x = np.arange(n)
         corr = np.corrcoef(x, sig)[0, 1]
         r_squared = corr ** 2 if not np.isnan(corr) else 0
@@ -592,11 +598,11 @@ def augment_data(X, y1, y2, y3, n_copies=2):
             Xs.append(mixed)
             Y1s.append(y1[idx_a[same_cls]]); Y2s.append(y2[idx_a[same_cls]]); Y3s.append(y3[idx_a[same_cls]])
 
-    # Extra augmentation for minority class (GZ=2) to boost recall
+    # Extra augmentation for the full-SOC resting ISC class to boost recall
     gz_mask = y2 == 2
     if gz_mask.sum() > 1:
         X_gz = X[gz_mask]
-        for _ in range(2):  # 2 extra copies for GZ
+        for _ in range(2):  # 2 extra copies for the full-SOC resting ISC class
             n_ops = np.random.randint(2, 4)
             chosen = np.random.choice(len(ops), n_ops, replace=False)
             aug = X_gz.copy()
@@ -935,7 +941,7 @@ def train_severity(X, labels, samples):
 
 # --- Figure generation ---
 L2_NAMES = ['Normal', 'Charging\nShort', 'Rest-Stage\nShort']
-L2_NAMES_FLAT = ['Normal', 'Charging Short', 'Rest-Stage Short']
+L2_NAMES_FLAT = ['Normal', 'Charging Short', 'Full-SOC Resting Short-circuit']
 
 def fig_training_curves(history, output_dir):
     n_ep = len(history.get('train_loss', []))
@@ -1246,7 +1252,7 @@ def fig_tsne(embed, labels, samples_sub, output_dir):
     # (b) L2: 3 classes with severity coloring
     color_l2 = {0: '#7F8C8D', 1: '#E74C3C', 2: '#2E86C1'}
     marker_l2 = {0: 'o', 1: '^', 2: 's'}
-    sc_labels = {0: 'Normal', 1: 'Charging Short', 2: 'Rest-Stage Short'}
+    sc_labels = {0: 'Normal', 1: 'Charging Short', 2: 'Full-SOC Resting Short-circuit'}
     cmaps = {1: 'Reds', 2: 'Blues'}
     all_r = [np.log10(float(s.get('resistance'))) for s in samples_sub
              if s.get('resistance') is not None and float(s.get('resistance'))>0]

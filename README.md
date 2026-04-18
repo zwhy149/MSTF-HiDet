@@ -18,7 +18,7 @@ The public code directly exposes the hierarchical diagnosis of:
 
 - `Normal`
 - `Charging Short`
-- `Rest-Stage Short`
+- `Full-SOC Resting Short-circuit`
 
 See [docs/SCENARIO_SCOPE.md](docs/SCENARIO_SCOPE.md) for the boundary between manuscript scope and public-code scope.
 

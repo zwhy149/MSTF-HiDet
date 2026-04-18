@@ -109,7 +109,7 @@ pred_l2     = ckpt['pred_l2']
 pred_l1     = ckpt['pred_l1']
 probs_final = ckpt['probs_final']
 samples_info = ckpt['samples_test_info']
-L2_NAMES    = ckpt['L2_NAMES']   # ['Normal', 'Charging Short', 'Rest-Stage Short']
+L2_NAMES    = ckpt['L2_NAMES']   # ['Normal', 'Charging Short', 'Full-SOC Resting Short-circuit']
 
 # ── Filter out 20Ω and 50Ω ──
 EXCLUDE_R = {20.0, 50.0}
@@ -198,7 +198,7 @@ add_panel_label(ax1, '(a)')
 # ────── (b) t-SNE (L2 classes) ──────
 color_l2  = {0: '#7F8C8D', 1: '#E74C3C', 2: '#2E86C1'}
 marker_l2 = {0: 'o',       1: '^',       2: 's'}
-sc_labels = {0: 'Normal',  1: 'Charging Short', 2: 'Rest-Stage Short'}
+sc_labels = {0: 'Normal',  1: 'Charging Short', 2: 'Full-SOC Resting Short-circuit'}
 
 handles = []
 for cls in present:

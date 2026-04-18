@@ -1,7 +1,7 @@
 """
 Generate detection delay figures.
 - Fig_CS: Charging Short -- 4 subplots: 10, 1, 0.1, 0.01 Ohm
-- Fig_RestStage: Short Circuit during Rest Stage -- 4 subplots
+- Fig_RestStage: Full-SOC Resting Short-circuit -- 4 subplots
 
 Approach: progressive scan from fault onset using CUSUM.
 Detection delay = first time classification flips to 'fault' minus fault onset.
@@ -264,8 +264,8 @@ print("="*60)
 plot_detection_grid(CS_FILES, 'Charging Short', 'Fig_CS_detection_delay')
 
 print("="*60)
-print("  Short Circuit during Rest Stage - Detection Delay Figure")
+print("  Full-SOC Resting Short-circuit - Detection Delay Figure")
 print("="*60)
-plot_detection_grid(GZ_FILES, 'Short Circuit during Rest Stage', 'Fig_RestStage_detection_delay')
+plot_detection_grid(GZ_FILES, 'Full-SOC Resting Short-circuit', 'Fig_RestStage_detection_delay')
 
 print("All done!")

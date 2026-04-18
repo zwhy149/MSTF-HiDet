@@ -1,9 +1,7 @@
 # Response to Reviewer Comment
 
 ## Reviewer Comment
-"本文提出的基于物理信息的快速诊断方法没有显著的创新，仅仅是利用了电压、温度、SOC和充电时间等常规参数。"
-
-(Translation: "The proposed physics-informed rapid diagnosis method lacks significant innovation, merely using conventional parameters such as voltage, temperature, SOC, and charging time.")
+"The proposed physics-informed rapid diagnostic method lacks substantial innovation and mainly relies on conventional variables such as voltage, temperature, SOC, and charging time."
 
 ---
 

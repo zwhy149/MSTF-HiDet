@@ -186,7 +186,7 @@
         "max": 1.0
       }
     },
-    "Rest-Stage Short": {
+    "Full-SOC Resting Short-circuit": {
       "TP": {
         "mean": 27.4,
         "std": 1.2,

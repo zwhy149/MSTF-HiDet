@@ -17,8 +17,8 @@ By default, the AE9 source code falls back to the original local path convention
 The public code currently expects the following folders:
 
 - `Normal`
-- `充电短路`
-- `GZ`
+- `Charging short-circuit`
+- `Full-SOC Resting short-circuit`
 
 ## Expected Per-File Fields
 
@@ -38,6 +38,6 @@ The current public code directly exposes the three-class diagnosis setting:
 
 - `Normal`
 - `Charging Short`
-- `Rest-Stage Short`
+- `Full-SOC Resting Short-circuit`
 
 If the manuscript contains broader experimental scenarios, those should be documented separately as manuscript scope versus public-code scope.

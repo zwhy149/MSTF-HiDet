@@ -8,13 +8,13 @@ The diagnostic label space directly implemented in the public code is:
 
 - `Normal`
 - `Charging Short`
-- `Rest-Stage Short`
+- `Full-SOC Resting Short-circuit`
 
 These are mapped from the scenario folders used by the code:
 
 - `Normal`
-- `充电短路`
-- `GZ`
+- charging-short folder in the original dataset layout
+- full-SOC resting short-circuit folder in the original dataset layout
 
 ## Important Manuscript Alignment Note
 

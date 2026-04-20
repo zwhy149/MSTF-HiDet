@@ -1,4 +1,4 @@
-# MSTF-HiDet: AE9 Review-Ready Code and Results Package
+# MSTF-HiDet: Review-Ready Code and Results Package
 
 This repository provides the public code release of the MSTF-HiDet framework for hierarchical diagnosis of external short-circuit conditions in LFP batteries. The package is organized as a review-ready minimum reproducible repository: it preserves the core training and inference code, the repeated-average manuscript-facing evaluation, the main figures and tables used in revision, and the auxiliary files needed to track the train/validation/test split logic.
 

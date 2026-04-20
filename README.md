@@ -4,7 +4,7 @@ This repository provides the public code release of the MSTF-HiDet framework for
 
 ## What This Repository Covers
 
-The public code directly supports the three-class diagnostic setting used in the AE9 package:
+The public code directly supports the three-class diagnostic setting used in the package:
 
 - `Normal`
 - `Charging short-circuit`

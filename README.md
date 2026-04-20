@@ -1,6 +1,6 @@
 # MSTF-HiDet: AE9 Review-Ready Code and Results Package
 
-This repository provides the public AE9 release of the MSTF-HiDet framework for hierarchical diagnosis of external short-circuit conditions in LFP batteries. The package is organized as a review-ready minimum reproducible repository: it preserves the core training and inference code, the repeated-average manuscript-facing evaluation, the main figures and tables used in revision, and the auxiliary files needed to track the train/validation/test split logic.
+This repository provides the public code release of the MSTF-HiDet framework for hierarchical diagnosis of external short-circuit conditions in LFP batteries. The package is organized as a review-ready minimum reproducible repository: it preserves the core training and inference code, the repeated-average manuscript-facing evaluation, the main figures and tables used in revision, and the auxiliary files needed to track the train/validation/test split logic.
 
 ## What This Repository Covers
 
@@ -80,7 +80,7 @@ Detailed instructions are provided in [docs/REPRODUCIBILITY.md](docs/REPRODUCIBI
 
 ## Suggested Entry Points
 
-- Training and original AE9 pipeline: [feature and train.py](feature%20and%20train.py)
+- Training and original pipeline: [feature and train.py](feature%20and%20train.py)
 - Repeated-average evaluation: [feature_and_train_repeated_avg_eval.py](feature_and_train_repeated_avg_eval.py)
 - Inference and fault localization: [detection.py](detection.py)
 - Averaged manuscript figures: [make_avg_publication_figs.py](make_avg_publication_figs.py)

@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+﻿cff-version: 1.2.0
 title: MSTF-HiDet AE9 Minimum Reproducible Repository
 message: If you use this repository, please cite the associated manuscript.
 type: software
@@ -6,4 +6,5 @@ license: MIT
 authors:
   - family-names: Placeholder
     given-names: Authors
-repository-code: https://github.com/<your-account>/MSTF-HiDet-AE9-minrepro
+repository-code: https://github.com/zwhy149/MSTF-HiDet
+

@@ -37,7 +37,7 @@ Optional columns used by parts of the code:
 The current public code directly exposes the three-class diagnosis setting:
 
 - `Normal`
-- `Charging Short`
+- `Charging short-circuit`
 - `Full-SOC Resting Short-circuit`
 
 If the manuscript contains broader experimental scenarios, those should be documented separately as manuscript scope versus public-code scope.

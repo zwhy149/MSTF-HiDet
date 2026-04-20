@@ -1,115 +1,81 @@
-# MSTF-HiDet AE9 Minimum Reproducible Repository
+# MSTF-HiDet: AE9 Review-Ready Code and Results Package
 
-This repository is the AE9-based minimum reproducible package for the MSTF-HiDet manuscript.
+This repository provides the public AE9 release of the MSTF-HiDet framework for hierarchical diagnosis of external short-circuit conditions in LFP batteries. The package is organized as a review-ready minimum reproducible repository: it preserves the core training and inference code, the repeated-average manuscript-facing evaluation, the main figures and tables used in revision, and the auxiliary files needed to track the train/validation/test split logic.
 
-It is organized to support:
+## What This Repository Covers
 
-- the original MSTF-HiDet training and inference code;
-- the repeated-average manuscript-facing evaluation over 5 seeds;
-- the final averaged tables and figures used for revision;
-- the battery-ID-based split export utility;
-- reviewer-oriented reproducibility documentation.
-
-## Scope
-
-This public package is centered on the finalized `AE9` code and results.
-
-The public code directly exposes the hierarchical diagnosis of:
+The public code directly supports the three-class diagnostic setting used in the AE9 package:
 
 - `Normal`
-- `Charging Short`
+- `Charging short-circuit`
 - `Full-SOC Resting Short-circuit`
 
-See [docs/SCENARIO_SCOPE.md](docs/SCENARIO_SCOPE.md) for the boundary between manuscript scope and public-code scope.
+The manuscript discusses a broader experimental context, but this public release should be cited according to the scope actually exposed by the code and interfaces in this repository. A concise scope note is provided in [docs/SCENARIO_SCOPE.md](docs/SCENARIO_SCOPE.md).
 
-## Main Manuscript-Facing Results
+## Main Result Reported in This Package
 
-The primary result is the 5-seed repeated Route B average:
+The manuscript-facing primary result in this repository is the repeated Route B evaluation over five random seeds:
 
-- MSTF-HiDet L2 Accuracy: `0.981 ± 0.014`
-- MSTF-HiDet L2 Macro-F1: `0.983 ± 0.013`
+- MSTF-HiDet L2 accuracy: `0.981 ± 0.014`
+- MSTF-HiDet L2 macro-F1: `0.983 ± 0.013`
 
-Fixed baseline averages:
-
-- Random Forest: `0.835 ± 0.027`
-- 1D-CNN: `0.853 ± 0.016`
-- XGBoost: `0.872 ± 0.010`
-- KNN: `0.937 ± 0.006`
-
-Main result files:
+The corresponding averaged outputs are stored in:
 
 - [results/repeated_average/final_report_avg.json](results/repeated_average/final_report_avg.json)
 - [results/repeated_average/repeated_eval_results.csv](results/repeated_average/repeated_eval_results.csv)
 - [results/repeated_average/table2_avg_results.md](results/repeated_average/table2_avg_results.md)
 - [results/repeated_average/table_safety_metrics_avg.md](results/repeated_average/table_safety_metrics_avg.md)
 
-## What Is Included
+Baseline averages retained in the public package are:
 
-- Original AE9 core code
-- Repeated-evaluation wrapper
-- Main manuscript-facing averaged figures
-- Compact single-run reference reports
-- One model bundle and one checkpoint bundle
-- Config templates, split export utility, and reproducibility docs
+- Random Forest: `0.835 ± 0.027`
+- 1D-CNN: `0.853 ± 0.016`
+- XGBoost: `0.872 ± 0.010`
+- KNN: `0.937 ± 0.006`
 
-## What Is Not Included
+## Repository Contents
 
-- Raw virtual dataset files
-- Raw real battery dataset files
-- Python virtual environment
-- Cache files such as `*_feature_cache.pkl`
-- Every per-seed generated image
-- Historical duplicate figure directories
+This repository includes:
 
-This is intentional: the goal is a lean, review-friendly, minimum reproducible repository.
+- the preserved AE9 core implementation;
+- the repeated-evaluation wrapper used for manuscript-facing reporting;
+- compact checkpoints for inference and figure regeneration;
+- exported battery-ID-based split files;
+- final averaged figures and tables;
+- supplementary outputs for detection delay and ECM confidence analysis;
+- documentation for reproducibility, data layout, and manuscript file mapping.
 
-## Repository Layout
+This repository intentionally excludes:
 
-```text
-.
-├── README.md
-├── LICENSE
-├── CITATION.cff
-├── requirements.txt
-├── feature and train.py
-├── detection.py
-├── feature_and_train_repeated_avg_eval.py
-├── run_single_seed_avg_eval.py
-├── make_avg_publication_figs.py
-├── run_all.py
-├── configs/
-├── data/
-├── docs/
-├── scripts/
-├── splits/
-├── checkpoints/
-└── results/
-```
+- raw virtual dataset files;
+- raw real experimental dataset files;
+- local cache files such as `*_feature_cache.pkl`;
+- virtual-environment folders;
+- large redundant figure exports that can be regenerated from code.
 
-## Installation
+## Quick Start
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Data Setup
-
-This repository does not bundle raw datasets.
-
-Recommended environment variables:
+or create the conda environment:
 
 ```bash
-set MSTF_VIRTUAL_DATA=D:\path\to\VRDATA
-set MSTF_REAL_DATA=D:\path\to\dataset_holographic
+conda env create -f environment.yml
+conda activate mstf-hidet-ae9
 ```
 
-See:
+Set dataset paths before running the pipeline on a new machine:
 
-- [data/DATASET.md](data/DATASET.md)
-- [docs/DATA_LAYOUT.md](docs/DATA_LAYOUT.md)
-- [configs/data_paths.example.json](configs/data_paths.example.json)
+```powershell
+$env:MSTF_VIRTUAL_DATA = "D:\path\to\VRDATA"
+$env:MSTF_REAL_DATA = "D:\path\to\dataset_holographic"
+```
 
-## Reproducing the Results
+Then run either the stepwise workflow:
 
 ```bash
 python "feature and train.py"
@@ -118,41 +84,44 @@ python make_avg_publication_figs.py
 python scripts/export_split_files.py
 ```
 
-Or run the wrapper:
+or the wrapper:
 
 ```bash
 python run_all.py
 ```
 
-See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
+Detailed instructions are provided in [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
 
-## Figures in This Public Package
+## Suggested Entry Points
 
-For GitHub, it is not necessary to upload every generated image.
+- Training and original AE9 pipeline: [feature and train.py](feature%20and%20train.py)
+- Repeated-average evaluation: [feature_and_train_repeated_avg_eval.py](feature_and_train_repeated_avg_eval.py)
+- Inference and fault localization: [detection.py](detection.py)
+- Averaged manuscript figures: [make_avg_publication_figs.py](make_avg_publication_figs.py)
+- Split export: [scripts/export_split_files.py](scripts/export_split_files.py)
 
-This package keeps only the main manuscript-facing figures for convenience:
+## Data and Code Availability
 
-- averaged training curve
-- averaged confusion matrix
-- averaged t-SNE
-- averaged SOTA comparison
-- averaged ablation
-- averaged FPR
-- one combined 2x2 figure
+- Data availability note: [docs/DATA_AVAILABILITY.md](docs/DATA_AVAILABILITY.md)
+- Code availability note: [docs/CODE_AVAILABILITY.md](docs/CODE_AVAILABILITY.md)
+- Dataset layout: [data/DATASET.md](data/DATASET.md)
+- Expected folder structure: [docs/DATA_LAYOUT.md](docs/DATA_LAYOUT.md)
+- Checkpoint description: [checkpoints/README.md](checkpoints/README.md)
 
-All other repetitive or historical figures can be regenerated from code when data are available.
+## Manuscript File Mapping
 
-## Important Notes
+The correspondence between repository outputs and manuscript-facing figures/tables is summarized in:
 
-- Use the repeated-average result for manuscript-facing reporting.
-- The single-run reference result is kept only for transparency.
-- The averaged t-SNE is a qualitative support figure.
-- The current public code should be described consistently with its actual scope and split logic.
+- [docs/MANUSCRIPT_FILE_MAP.md](docs/MANUSCRIPT_FILE_MAP.md)
+- [docs/RESULTS_INDEX.md](docs/RESULTS_INDEX.md)
 
-## Citation
+## Notes for Reuse
 
-See [CITATION.cff](CITATION.cff).
+- The repeated-average outputs are the primary results intended for manuscript reporting.
+- The preserved single-run package is kept for transparency and traceability only.
+- The averaged t-SNE figure should be interpreted as qualitative support rather than a primary statistical result.
+- Internal folder tokens such as `GZ` are retained where they are needed to remain consistent with the original dataset layout and split files.
 
-## License
+## Citation and License
 
-MIT. See [LICENSE](LICENSE).
+Please cite the associated manuscript when using this repository. Citation metadata are provided in [CITATION.cff](CITATION.cff). This repository is released under the MIT license; see [LICENSE](LICENSE).

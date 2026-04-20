@@ -6,7 +6,7 @@ Usage:
   python detector.py --file  test_file.xlsx --plot
 
 Loads a trained model bundle and performs:
-  1. File-level classification: Normal / Charging Short / Full-SOC Resting Short-circuit
+  1. File-level classification: Normal / Charging short-circuit / Full-SOC Resting Short-circuit
   2. Sliding-window detection to locate fault onset
   3. Detection delay measurement
 """
@@ -26,7 +26,7 @@ from scipy.stats import kurtosis, skew
 
 SCENARIO_DISPLAY_NAMES = {
     'Normal': 'Normal',
-    '充电短路': 'Charging Short',
+    '充电短路': 'Charging short-circuit',
     'GZ': 'Full-SOC Resting Short-circuit',
 }
 
@@ -598,7 +598,7 @@ def generate_sci_detection_figure(detector, base_dir, output_dir):
 
     target_r = [10, 1, 0.1, 0.01]
     scenarios = {
-        '充电短路': {'en': 'Charging Short', 'slug': 'charging_short', 'color': '#D32F2F', 'light': '#FFCDD2'},
+        '充电短路': {'en': 'Charging short-circuit', 'slug': 'charging_short_circuit', 'color': '#D32F2F', 'light': '#FFCDD2'},
         'GZ': {'en': 'Full-SOC Resting Short-circuit', 'slug': 'full_soc_resting_short_circuit', 'color': '#1565C0', 'light': '#BBDEFB'},
     }
 

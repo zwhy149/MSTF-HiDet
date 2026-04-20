@@ -1,6 +1,0 @@
-{
-  "virtual_data_root": "D:/path/to/VRDATA",
-  "real_data_root": "D:/path/to/dataset_holographic",
-  "output_dir": "./detection_results",
-  "notes": "Set MSTF_VIRTUAL_DATA and MSTF_REAL_DATA environment variables, or edit feature and train.py if needed."
-}

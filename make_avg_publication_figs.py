@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent
 AVG_DIR = ROOT / "avg_evaluation_results"
 RUNS_DIR = AVG_DIR / "runs"
 SEED_DIRS = sorted([p for p in RUNS_DIR.iterdir() if p.is_dir() and p.name.startswith("seed_")])
-L2_NAMES = ["Normal", "Charging Short", "Full-SOC Resting Short-circuit"]
+L2_NAMES = ["Normal", "Charging short-circuit", "Full-SOC Resting Short-circuit"]
 L1_NAMES = ["Normal", "Fault"]
 THRESHOLDS = np.linspace(0.01, 0.99, 300)
 
@@ -522,7 +522,7 @@ def plot_avg_tsne_style(tsne_payload, out_dir: Path):
 
 
 def collect_avg_fpr(runs):
-    class_names = ["Normal", "Charging Short", "Full-SOC Resting Short-circuit"]
+    class_names = ["Normal", "Charging short-circuit", "Full-SOC Resting Short-circuit"]
     default_fpr = {name: [] for name in class_names}
     curves = {name: [] for name in class_names}
     for run in runs:
@@ -553,8 +553,8 @@ def collect_avg_fpr(runs):
 
 
 def plot_avg_fpr(curve_summary, out_dir: Path):
-    colors = {"Normal": "#7F8C8D", "Charging Short": "#E74C3C", "Full-SOC Resting Short-circuit": "#2E86C1"}
-    linestyles = {"Normal": "-", "Charging Short": "--", "Full-SOC Resting Short-circuit": "-."}
+    colors = {"Normal": "#7F8C8D", "Charging short-circuit": "#E74C3C", "Full-SOC Resting Short-circuit": "#2E86C1"}
+    linestyles = {"Normal": "-", "Charging short-circuit": "--", "Full-SOC Resting Short-circuit": "-."}
     fig, ax = plt.subplots(figsize=(7.2, 5.4))
     for cls_name in L2_NAMES:
         mean_curve = curve_summary[cls_name]["mean"]
@@ -662,8 +662,8 @@ def plot_combined_2x2_avg(tsne_payload, conf_stats, curve_summary, out_dir: Path
     ax_tsne1, ax_tsne2 = axes[1]
     fig.subplots_adjust(hspace=0.32, wspace=0.30)
 
-    colors = {"Normal": "#7F8C8D", "Charging Short": "#E74C3C", "Full-SOC Resting Short-circuit": "#2E86C1"}
-    linestyles = {"Normal": "-", "Charging Short": "--", "Full-SOC Resting Short-circuit": "-."}
+    colors = {"Normal": "#7F8C8D", "Charging short-circuit": "#E74C3C", "Full-SOC Resting Short-circuit": "#2E86C1"}
+    linestyles = {"Normal": "-", "Charging short-circuit": "--", "Full-SOC Resting Short-circuit": "-."}
     for cls_name in L2_NAMES:
         mean_curve = curve_summary[cls_name]["mean"]
         std_curve = curve_summary[cls_name]["std"]

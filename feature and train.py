@@ -1,5 +1,5 @@
 # MSTF-HiDet: Multi-Scale Temporal Fusion Hierarchical Detection
-# Three-class ISC diagnosis: Normal / Charging Short / Full-SOC Resting Short-circuit
+# Three-class ISC diagnosis: Normal / Charging short-circuit / Full-SOC Resting Short-circuit
 
 import os, re, warnings, json, time as _time, copy, pickle
 import numpy as np
@@ -36,7 +36,7 @@ warnings.filterwarnings('ignore')
 
 SCENARIO_DISPLAY_NAMES = {
     'Normal': 'Normal',
-    '充电短路': 'Charging Short',
+    '充电短路': 'Charging short-circuit',
     'GZ': 'Full-SOC Resting Short-circuit',
 }
 
@@ -941,7 +941,7 @@ def train_severity(X, labels, samples):
 
 # --- Figure generation ---
 L2_NAMES = ['Normal', 'Charging\nShort', 'Rest-Stage\nShort']
-L2_NAMES_FLAT = ['Normal', 'Charging Short', 'Full-SOC Resting Short-circuit']
+L2_NAMES_FLAT = ['Normal', 'Charging short-circuit', 'Full-SOC Resting Short-circuit']
 
 def fig_training_curves(history, output_dir):
     n_ep = len(history.get('train_loss', []))
@@ -1252,7 +1252,7 @@ def fig_tsne(embed, labels, samples_sub, output_dir):
     # (b) L2: 3 classes with severity coloring
     color_l2 = {0: '#7F8C8D', 1: '#E74C3C', 2: '#2E86C1'}
     marker_l2 = {0: 'o', 1: '^', 2: 's'}
-    sc_labels = {0: 'Normal', 1: 'Charging Short', 2: 'Full-SOC Resting Short-circuit'}
+    sc_labels = {0: 'Normal', 1: 'Charging short-circuit', 2: 'Full-SOC Resting Short-circuit'}
     cmaps = {1: 'Reds', 2: 'Blues'}
     all_r = [np.log10(float(s.get('resistance'))) for s in samples_sub
              if s.get('resistance') is not None and float(s.get('resistance'))>0]

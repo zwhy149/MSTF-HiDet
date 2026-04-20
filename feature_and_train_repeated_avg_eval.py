@@ -34,7 +34,7 @@ AVG_ROOT = ROOT / "avg_evaluation_results"
 RUNS_ROOT = AVG_ROOT / "runs"
 DEFAULT_SEEDS = [42, 52, 62, 72, 82]
 FIXED_BASELINES = ["Random Forest", "1D-CNN", "XGBoost", "KNN"]
-L2_NAMES = ["Normal", "Charging Short", "Full-SOC Resting Short-circuit"]
+L2_NAMES = ["Normal", "Charging short-circuit", "Full-SOC Resting Short-circuit"]
 L1_NAMES = ["Normal", "Fault"]
 
 

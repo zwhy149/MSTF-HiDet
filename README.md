@@ -30,7 +30,7 @@ Baseline averages retained in the public package are:
 
 This repository includes:
 
-- the preserved AE9 core implementation;
+- the preserved core implementation;
 - the repeated-evaluation wrapper used for manuscript-facing reporting;
 - compact checkpoints for inference and figure regeneration;
 - exported battery-ID-based split files;

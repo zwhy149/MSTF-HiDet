@@ -19,13 +19,6 @@ The manuscript-facing primary result in this repository is the repeated Route B 
 - MSTF-HiDet L2 accuracy: `0.981 ± 0.014`
 - MSTF-HiDet L2 macro-F1: `0.983 ± 0.013`
 
-The corresponding averaged outputs are stored in:
-
-- [results/repeated_average/final_report_avg.json](results/repeated_average/final_report_avg.json)
-- [results/repeated_average/repeated_eval_results.csv](results/repeated_average/repeated_eval_results.csv)
-- [results/repeated_average/table2_avg_results.md](results/repeated_average/table2_avg_results.md)
-- [results/repeated_average/table_safety_metrics_avg.md](results/repeated_average/table_safety_metrics_avg.md)
-
 Baseline averages retained in the public package are:
 
 - Random Forest: `0.835 ± 0.027`

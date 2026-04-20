@@ -38,13 +38,6 @@ This repository includes:
 - supplementary outputs for detection delay and ECM confidence analysis;
 - documentation for reproducibility, data layout, and manuscript file mapping.
 
-This repository intentionally excludes:
-
-- raw virtual dataset files;
-- raw real experimental dataset files;
-- local cache files such as `*_feature_cache.pkl`;
-- virtual-environment folders;
-- large redundant figure exports that can be regenerated from code.
 
 ## Quick Start
 

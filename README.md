@@ -54,12 +54,6 @@ conda env create -f environment.yml
 conda activate mstf-hidet-ae9
 ```
 
-Set dataset paths before running the pipeline on a new machine:
-
-```powershell
-$env:MSTF_VIRTUAL_DATA = "D:\path\to\VRDATA"
-$env:MSTF_REAL_DATA = "D:\path\to\dataset_holographic"
-```
 
 Then run either the stepwise workflow:
 
